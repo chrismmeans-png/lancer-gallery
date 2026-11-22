@@ -47,7 +47,7 @@ export async function getPhotos(
   "use cache";
   cacheLife("hours");
   const res = await cloudinary.search
-    .expression(`asset_folder="${sport}/${season}"`)
+    .expression(`folder:"${sport}/${season}" OR asset_folder:"${sport}/${season}"`)
     .sort_by("created_at", "asc")
     .max_results(500)
     .execute();
