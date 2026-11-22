@@ -1,69 +1,84 @@
 import Image from "next/image";
 
+// Change this ONE line if your image file has a different name
+const MASCOT = "/lancer.webp.jpg";
+
+const sports = [
+  { name: "Swim", note: "Meets, relays and championships" },
+  { name: "Ice Hockey", note: "Games, rivalries and playoff runs" },
+];
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="flex min-h-screen flex-col">
+      <nav className="sticky top-0 z-10 border-b border-gold/40 bg-black/80 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+          <span className="font-display text-lg tracking-widest text-gold">
+            LANCER PHOTOS
+          </span>
+          <a
+            href="#sports"
+            className="text-sm text-gray-300 transition hover:text-gold"
+          >
+            Sports
+          </a>
+        </div>
+      </nav>
+
+      <header className="relative overflow-hidden px-4 py-14 text-center">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(201,162,39,0.12),transparent_60%)]" />
+        <div className="fade-up relative mx-auto flex max-w-3xl flex-col items-center gap-6">
+          <Image
+            src={MASCOT}
+            alt="Lafayette Lancers mascot"
+            width={320}
+            height={320}
+            priority
+            className="h-auto w-56 rounded-2xl shadow-[0_0_60px_rgba(201,162,39,0.35)] transition duration-500 hover:scale-105 sm:w-72"
+          />
+          <h1 className="font-display bg-linear-to-r from-[#ffd24a] via-[#fff6d6] to-[#ffd24a] bg-clip-text px-4 pb-1 text-4xl font-bold tracking-wide text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] sm:text-6xl">
+            LANCER SPORTS PHOTOS
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="max-w-xl text-gray-300">
+            A fan celebration of Lafayette High School sports.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      <main id="sports" className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
+        <h2 className="font-display mb-6 text-3xl tracking-wide text-gold">
+          Pick a sport
+        </h2>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {sports.map((sport, i) => (
+            <div
+              key={sport.name}
+              style={{ animationDelay: `${i * 150}ms` }}
+              className="fade-up group rounded-2xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-[0_0_30px_rgba(201,162,39,0.3)]"
+            >
+              <h3 className="font-display text-2xl tracking-wide text-white group-hover:text-gold">
+                {sport.name}
+              </h3>
+              <p className="mt-1 text-gray-400">{sport.note}</p>
+              <span className="mt-4 inline-block rounded-full border border-gold/50 px-3 py-1 text-xs text-gold">
+                Photos coming soon
+              </span>
+            </div>
+          ))}
         </div>
       </main>
+
+      <footer className="border-t border-gold/40 bg-black px-4 py-8 text-center text-sm text-gray-400">
+        <p className="mx-auto max-w-3xl">
+          This is an unofficial fan site. It is not affiliated with Lafayette
+          High School or the Rockwood School District. It is simply a
+          celebration of Lafayette sports.
+        </p>
+        <p className="mt-2">
+          To request a photo be removed, email{" "}
+          <span className="text-gold">your-email@example.com</span>.
+        </p>
+      </footer>
     </div>
   );
 }
